@@ -1,0 +1,51 @@
+
+set header_cache="~/.mutt/cache/headers"
+set message_cachedir="~/.mutt/cache/bodies"
+set certificate_file="~/.mutt/certificates"
+
+set sig_on_top="yes"
+
+set edit_hdrs 											# see headers when editing mail
+set include 											# quote msg when replying
+set reply_to 											# use adress from reply-to header when replying
+set fast_reply 											# do not ask for to, sbuject,.. when replying
+set auto_tag 											# if something is tagged run commands on all tagged msgs
+set delete_untag 										# untag msgs when marking them for deletion
+set mark_old = no 										# don't differentiate between new and old
+
+# Response Formats
+set forward_format="Fwd: %s"
+hdr_order From: Date: To: Cc: Reply-To: Subject: 		# Header Field Order
+ignore *
+unignore From: Date: To: Cc: Reply-To: Subject:
+my_hdr Reply-To: 										# All Message Headers
+set move = no 											# stop asking to move msgs to mbox
+set sort = 'threads'
+
+set tilde 												# pad bottom blank lines when in page view
+set pager_index_lines=5 								# index mail lines on top when in page view
+
+# Sorting
+#set sort_aux = 'last-date-received' 					# Sort Oldest at top
+set sort_aux = 'reverse-last-date-received' 			# Sort Newest at top
+
+# Take me back to the index before deleting when in page view
+folder-hook . 'macro pager d "<exit><delete-message>" "Delete the message"'
+
+# aliases (sort of address book)
+set alias_file=~/.mutt/mail_aliases
+#source ~/.mutt/mail_aliases
+
+# abook search query
+set query_command = "abook --mutt-query '%s'"
+
+set editor="nano '+8,1'" 								# vim for editing, and move marker to line 7
+
+# color WHERE FOREGROUND BACKGROUND REGEXP
+color index green default ~p 							# i am to/cc
+color index cyan default ~P 							# from me
+color index yellow default ~N 							# new
+color index yellow default ~O 							# new
+color index magenta default ~F 							# flagged
+color index blue default ~T 							# tagged
+color index red default ~D 								# deleted

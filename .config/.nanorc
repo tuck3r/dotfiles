@@ -1,0 +1,82 @@
+## Nanorc files
+include "~/.nano/nanorc.nanorc"
+
+## C/C++
+include "~/.nano/c.nanorc"
+## HTML
+include "~/.nano/html.nanorc"
+## TeX
+include "~/.nano/tex.nanorc"
+## Quoted emails (under e.g. mutt)
+include "~/.nano/mutt.nanorc"
+## Patch files
+include "~/.nano/patch.nanorc"
+## Manpages
+include "~/.nano/man.nanorc"
+## Groff
+include "~/.nano/groff.nanorc"
+## Perl
+include "~/.nano/perl.nanorc"
+## Python
+include "~/.nano/python.nanorc"
+## Ruby
+include "~/.nano/ruby.nanorc"
+## Java
+include "~/.nano/java.nanorc"
+## Assembler
+include "~/.nano/asm.nanorc"
+## Bourne shell scripts
+include "~/.nano/sh.nanorc"
+## POV-Ray
+include "~/.nano/pov.nanorc"
+
+## Debian Syntax
+## syntax highlighting for /etc/apt/sources.list
+## syntax "apt/sources.list" "sources\.list(\.old|~)?$"
+# component
+color brightmagenta "^deb(-src)? ((http|file|ftp):/[^ ]+|cdrom:\[[^\]]+\]/|cdrom:\[[a-zA-Z0-9\._-\(\) ]+\]/) [^ ]+ .+$"
+# distribution
+color brightred "^deb(-src)? ((http|file|ftp):/[^ ]+|cdrom:\[[^\]]+\]/|cdrom:\[[a-zA-Z0-9\._-\(\) ]+\]/) [^ ]+"
+# URI
+color brightgreen "(http|file|ftp):/[^ ]+"
+# cdroms
+# [^\]] does not work...
+color brightgreen "cdrom:\[[a-zA-Z0-9\._-\(\) ]+\]/"
+# deb / deb-src
+color cyan "^deb"
+color brightblue "^deb-src"
+# comments
+color brightyellow "#.*"
+
+## Syntax for ini files
+# ini highlighting
+syntax "ini" "\.ini(\.old|~)?$"
+# values
+color brightred "=.*$"
+# equal sign
+color green "="
+# numbers
+color brightblue "-?[0-9\.]+\s*($|;)"
+# ON/OFF
+color brightmagenta "ON|OFF|On|Off|on|off\s*($|;)"
+# sections
+color brightcyan "^\s*\[.*\]"
+# keys
+color cyan "^\s*[a-zA-Z0-9_\.]+"
+# comments
+color brightyellow ";.*$"
+
+## My custom nano options
+
+## Below is for if you wanted to create custom syntax [which I do not..]
+#syntax "comments" ".*"
+#color green "^#.*"
+set autoindent
+set nowrap
+set tabsize 10
+set autoindent
+set brackets ""')>]}"
+set matchbrackets "(]}"
+
+## Makes scrolling line by line
+set smooth

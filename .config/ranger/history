@@ -1,0 +1,28 @@
+show_hidden
+help
+remove
+chmod +x
+rename .pinerc_old
+open_with
+mkdir emailbak
+rename 899lrside
+open_with chrome
+man ranger > grep 'rename'
+open_with 0
+open_with feh
+open_with gimp
+mkdir Mumble
+mkdir skins
+mkdir NYVES - Anxiety
+open_with google-chrome-stable
+open_with 
+rename .weechat2
+rename .weechat
+open_with geany
+mkdir vstrom
+
+unzip
+open_with 1
+open_with nano
+delete
+shell 

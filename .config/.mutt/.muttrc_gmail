@@ -1,0 +1,23 @@
+# Change the following six lines to match your Gmail account details
+set imap_user = "<user>@gmail.com"
+#set imap_pass = "<password>"
+set smtp_url = "smtp://<user>@smtp.gmail.com:587/"
+set smtp_pass = $imap_pass
+set from = "<user>@gmail.com"
+set realname = "<name>"
+
+set folder ="imaps://imap.gmail.com:993"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+
+# How often should mutt check for new mail?
+set mail_check=60
+# Notify me of new mail in my mailbox this often
+set timeout=15
+set imap_check_subscribed
+
+# Gmail have the notion of labels If a message has several labels, we actually need to move it to the trash to remove all labels (delete from all folders) This one requires mutt with the trash patch
+#set trash = "=[Gmail]/Trash"
+
+# Signature
+set signature="~/.mutt/.muttsig_personal"

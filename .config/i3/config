@@ -1,0 +1,289 @@
+# i3 config file v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# base file from /u/smlb's dotfile
+# faenza icons / flatdarkstudio / fontawesome
+#########################
+# Main
+#########################
+
+set $mod Mod4
+font pango:FontAwesome 11px
+
+# Layout colors           bord      bg    text 
+client.focused #1F1F1F #505050 #BBBBBB #4F4F4F
+client.focused_inactive #1A1A1A #1A1A1A #424242 #121212
+client.unfocused #1A1A1A #1A1A1A #4F4F4F #1A1A1A
+client.urgent #1A1A1A #3B89B5 #a5a5a5 #1A1A1A
+client.background #121212
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+new_window 1pixel 
+new_float 1pixel
+
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+#bindsym $mod+b exec --no-startup-id i3-msg border toggle
+
+#########################
+# Shortcut Bindings
+#########################
+bindsym $mod+Return exec terminator
+
+bindsym $mod+a mode "$shortcuts"
+set $shortcuts f-firefox,i-iS,p-pidgin,g-geany,c-chrome,n-cmst
+mode "$shortcuts" {
+    bindsym f exec firefox
+    bindsym i exec firefox <webpage>
+    bindsym p exec pidgin
+    bindsym g exec geany
+    bindsym c exec google-chrome-stable
+    bindsym n exec cmst -im
+    bindsym r exec teminator -e ranger
+    
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+q kill
+
+# generic lockscreen
+#bindsym $mod+l exec i3lock -d -c "121212"
+# my blur lockscreen
+bindsym $mod+l exec ~/bin/blurlock.sh
+
+#bindsym $mod+d exec dmenu_run
+#bindsysm $mod+d exec i3-dmenu-desktop
+bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "#2f343f" -bg "#2f343f" -fg "#f3f4f5" -hlbg "#2f343f" -hlfg "#9575cd" -font "FontAwesome 14"
+
+bindsym Print exec scrot '%F--%I:%M:%S:%p--$wx$h--scrot.png' -e 'mv $f /home/jasper/images/scrot'
+
+# Scratchpad
+bindsym $mod+Shift+n move scratchpad
+bindsym $mod+n scratchpad show
+
+#########################
+# Shutdown Mngmt
+#########################
+
+bindsym $mod+x mode "$mode_system"
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (x) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.config/i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/.config/i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/i3exit reboot, mode "default"
+    bindsym x exec --no-startup-id ~/.config/i3/i3exit shutdown, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+#########################
+# Laptop / Audio Keys
+#########################
+
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master '5%+'
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset  Master '5%-'
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioStop exec mpc stop
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioNext exec mpc next
+bindsym XF86TouchpadToggle exec touchpad
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10%
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10%
+
+#########################
+# Window Keybindings
+#########################
+
+# Custom popup states -- via xprop in terminal
+for_window [class="Google-chrome-stable" instance="crx_chlffgpmiacpedhhbkiomidkjlcfhogd"] floating enable
+for_window [class="google-chrome" instance="crx_chlffgpmiacpedhhbkiomidkjlcfhogd"] floating enable
+
+
+bindsym $mod+c move absolute position center
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Cycle through active workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# split in horizontal orientation
+bindsym $mod+Shift+h split h
+
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# focus the child container
+bindsym $mod+q focus child
+
+# swapping workspace contents
+#bindsym $mod+Shift+s exec /home/jasper/.config/i3/switch.py
+workspace_auto_back_and_forth yes
+
+# Assign Workspace variables
+set $WS1 1: work 
+set $WS2 2: virtual 
+set $WS3 3: web 
+set $WS4 4: code 
+set $WS5 5: admin 
+set $WS6 6: games 
+set $WS7 7: media 
+set $WS8 8: web 
+set $WS9 9: school 
+
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+
+# move current workspace, in dual effectively toggles
+#bindsym $mod+a move workspace to output left
+bindsym $mod+z move workspace to output right
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ograve resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#########################
+# System Programs
+#########################
+
+# Change xrandr to laptop
+bindsym $mod+m exec xrandr --output eDP1 --auto --output DP1 --off --output DP2 --off
+# Change xrandr to dual screen mode
+bindsym $mod+shift+m exec xrandr --output eDP1 --off --output DP1 --mode 1920x1080 --left-of DP2 --output DP2 --auto
+# Actual boot option. Currently dual screen
+exec --no-startup-id xrandr --output eDP1 --off --output DP1 --mode 1920x1080 --left-of DP2
+#exec_always --no-startup-id cmst -m
+#exec --no-startup-id wicd-client --tray
+#exec_always --no-startup-id connman-ui-gtk
+#exec --no-startup-id pulseaudio --start
+#exec --no-startup-id mpd 
+#exec_always --no-startup-id parcellite
+exec_always --no-startup-id compton -bcCGf -i 0.8 -e 0.9 --no-fading-openclose --focus-exclude
+#exec_always pidgin
+#exec_always --no-startup-id dropboxd
+
+#########################
+# Wallpaper!
+#########################
+
+#exec_always feh --bg-scale '/home/jasper/Pictures/archwall.png'
+#exec_always feh --bg-scale '/home/jasper/Pictures/sailor imperial black/myjI6SJ.jpg'
+#exec_always feh --bg-scale '/home/jasper/Pictures/batmanflat.jpg'
+exec_always feh --bg-scale '/home/jasper/Pictures/alpinestarsWP.png'
+#exec_always feh --bg-tile '/home/jasper/Pictures/899lrside_highlight.jpg'
+#exec_always feh --bg-scale '/home/jasper/Pictures/h1z1_1.png'
+#exec_always feh --bg-scale '/home/jasper/Pictures/dayz/dayzwookie.jpg'
+
+#########################
+# i3bar
+#########################
+#bar {
+#        output DP1
+#        output DP2
+#        output eDP1
+##		 mode dock
+#        tray_output DP1
+##        tray_output eDP1
+##        status_command i3status | /home/jasper/bin/weather.py --wrap-i3-status --format "{city}, {region}: {text}, {temp}°{unit_temperature}. Wind: {wind_direction_fuzzy}@{wind_speed}mph Humidity: {humidity}%" 12588228
+#        status_command i3status
+#        font pango: FontAwesome, Icon 9
+#        position top
+#        colors {
+#            background #080808 
+#            statusline #808080
+#            separator #808080
+#            focused_workspace #080808 #222222 #808080
+#            active_workspace #080808 #080808 #797979 
+#            inactive_workspace #080808 #080808 #4F4F4F
+#            urgent_workspace #080808 #080808 #EA4C59
+#        }
+#}
+
+#########################
+# i3bar - i3pystatus
+#########################
+
+bar {
+    status_command    python ~/.config/i3pystatus/config.py
+    position          top
+    workspace_buttons yes
+    font pango: FontAwesome, Icon 9
+#	tray_output DP1
+#	tray_output eDP1
+    colors {
+            background #080808 
+            statusline #808080
+            separator #808080
+            focused_workspace #080808 #222222 #808080
+            active_workspace #080808 #080808 #797979 
+            inactive_workspace #080808 #080808 #4F4F4F
+            urgent_workspace #080808 #080808 #EA4C59
+			}
+}

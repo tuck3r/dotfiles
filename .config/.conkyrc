@@ -1,0 +1,135 @@
+# conky configuration
+#
+# The list of variables has been removed from this file in favour
+# of keeping the documentation more maintainable.
+# Check http://conky.sf.net for an up-to-date-list.
+#
+# For ideas about how to modify conky, please see:
+# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
+#
+# For help with conky, please see:
+# http://crunchbanglinux.org/forums/topic/2047/conky-help/
+#
+# Enjoy! 
+##############################################
+# Settings
+##############################################
+background yes
+    use_xft yes
+    xftfont HandelGotD:size=8
+    xftalpha 0.5
+    update_interval 4.0
+    total_run_times 0
+    own_window yes
+    own_window_type normal
+    own_window_transparent yes
+    own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+    double_buffer yes
+    minimum_size 200 5
+    maximum_width 230
+    draw_shades no
+    draw_outline no
+    draw_borders no
+    draw_graph_borders yes
+    default_color grey
+    default_shade_color red
+    default_outline_color green
+    alignment middle_right
+    #display VGA
+    #gap_x 1500
+    gap_y 5
+    no_buffers yes
+    uppercase no
+    cpu_avg_samples 2
+    override_utf8_locale no
+    TEXT
+  CPU $alignr ${cpu cpu0}%
+  ${cpugraph cpu0}
+  CPU1: ${cpu cpu1}% $alignr CPU2: ${cpu cpu2}%
+#    CPU1: ${cpu cpu1}% ${cpubar cpu1}
+#    CPU2: ${cpu cpu2}% ${cpubar cpu2}
+#    Processor
+#    Intel Pentium D 3.00GHz   x  2
+#    Temperature:${color } ${acpitemp} C${alignr}Fan: $alignr${acpifan}
+
+  ram $alignc $mem / $memmax $alignr $memperc%
+#    $membar
+  swap $alignc $swap / $swapmax $alignr $swapperc%
+#    ${swapbar}
+  sda $alignc ${fs_used /} / ${fs_size /} $alignr ${fs_free_perc /}%
+  sdb $alignc ${fs_used /media/7EBA4CDDBA4C9415} / ${fs_size /media/7EBA4CDDBA4C9415} $alignr ${fs_free_perc /media/7EBA4CDDBA4C9415}%
+#    ${fs_bar /}
+#   global $alignc ${fs_used /home/karlos/global} / ${fs_size /home/karlos/global} $alignr ${fs_free_perc /home/karlos/global}%
+#   ${fs_bar /home/karlos/global}
+
+  $processes processes $alignr ($running_processes running)
+#    Health
+#    Temp: ${acpitemp}C  ${color }(${acpitempf}F)
+#    cpu temp: $alignr ${hddtemp} C
+#    sys temp: $alignr${i2c 9191-0290 temp 1} C
+#    HD1  temp: $alignr${execi 300 nc localhost 7634 | cut -c31-32 ;} C
+#    HD2  temp: $alignr${execi 300 nc localhost 7634 | cut -c66-67 ;} C
+
+  Name $alignr PID    CPU
+  ${top name 1} $alignr ${top pid 1} ${top cpu 1}
+  ${top name 2} $alignr ${top pid 2} ${top cpu 2}
+  ${top name 3} $alignr ${top pid 3} ${top cpu 3}
+  ${top name 4} $alignr ${top pid 4} ${top cpu 4}
+  ${top name 5} $alignr ${top pid 5} ${top cpu 5}
+  ${top name 6} $alignr ${top pid 6} ${top cpu 6}
+  ${top name 7} $alignr ${top pid 7} ${top cpu 7}
+#    ${top name 8} $alignr ${top pid 8} ${top cpu 8}
+#    ${top name 9} $alignr ${top pid 9} ${top cpu 9}
+#    ${top name 10} $alignr ${top pid 10} ${top cpu 10}
+
+  Name $alignr PID    MEM
+  ${top_mem name 1} $alignr ${top_mem pid 1} ${top_mem mem 1}
+  ${top_mem name 2} $alignr ${top_mem pid 2} ${top_mem mem 2}
+  ${top_mem name 3} $alignr ${top_mem pid 3} ${top_mem mem 3}
+  ${top_mem name 4} $alignr ${top_mem pid 4} ${top_mem mem 4}
+  ${top_mem name 5} $alignr ${top_mem pid 5} ${top_mem mem 5}
+  ${top_mem name 6} $alignr ${top_mem pid 6} ${top_mem mem 6}
+  ${top_mem name 7} $alignr ${top_mem pid 7} ${top_mem mem 7}
+#    ${top_mem name 8} $alignr ${top_mem pid 8} ${top_mem mem 8}
+#    ${top_mem name 9} $alignr ${top_mem pid 9} ${top_mem mem 9}
+#  	${top_mem name 10} $alignr ${top_mem pid 10} ${top_mem mem 10}
+#    ath0:$alignr${addr ath0}
+
+  eth0:$alignr${addr eth0}
+  eth1:$alignr${addr eth1}
+  wlan0:$alignr${addr wlan0}
+  wlan1:$alignr${addr wlan1}
+  
+  download $alignr ${downspeed eth0}
+  ${downspeedgraph eth0}
+  upload $alignr ${upspeed eth0}
+  ${upspeedgraph eth0}
+ 
+  Inbound: ${tcp_portmon 1 32767 count}$alignr Outbound: ${tcp_portmon 32768 61000 count}
+  ${tcp_portmon 32768 61000 rhost 0}
+  ${tcp_portmon 32768 61000 rhost 1}
+  ${tcp_portmon 32768 61000 rhost 2}
+  ${tcp_portmon 32768 61000 rhost 3}
+  ${tcp_portmon 32768 61000 rhost 4}
+#  Inbound: ${tcp_portmon 1 32767 count}$alignr Outbound: ${tcp_portmon 32768 61000 count}
+#  ${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
+#  ${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
+#  ${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
+#  ${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
+#  ${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
+#    ${tcp_portmon 32768 61000 rip 5} ${alignr} ${tcp_portmon 32768 61000 rservice 5}
+#
+#  shortcuts:
+#  Alt+F3$alignr Alt Menu
+#  Super+r$alignr Run Dialog
+#  Super+space$alignr Main Menu
+#  Super+t$alignr Terminal
+#  Super+f$alignr File Manager
+#  Super+e$alignr Editor
+#  Super+m$alignr Media Player
+#  Super+w$alignr Web Browser
+#    Super+g$alignr Graphics Editor
+#  Super+l$alignr Lock Screen
+#    Super+v$alignr Volume Control
+#    Super+x$alignr Logout
+#    PrtSc$alignr Screenshot

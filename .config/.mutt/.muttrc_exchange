@@ -1,0 +1,57 @@
+# my variables ##################
+# edit these to log into exchange an exchange server 2007/2010. make sure mutt is compiled with opensasl.
+
+set my_email = ""			# ie: john.doe@exchange.com
+set my_username = ""			# ie: 'john.doe'
+set my_domain = ""			# ie: localgroup
+set my_smtp = ""			# ie: webmail.domain.com
+set my_name = ""			# ie: John Doe
+set my_port = "587"			# ie: 587
+#set my_pass = "<password>"		# ie: your password...
+
+#################################
+
+# Change the following six lines to match your account details
+set imap_user = $my_email
+#set imap_pass = $my_pass
+
+# Need to call port 587 as that doesnt require a cert. 25 does.
+# without domain, sometimes works
+#set smtp_url = smtps://$my_smtp:$myport/
+
+# sometimes you need to call the domain
+set smtp_url = smtps://$my_domain\$my_username:$imap_pass@$my_smtp:$my_port
+
+set smtp_pass = $imap_pass
+#set sendmail="/usr/bin/msmtp"							# if you happen to be using sendmail
+set smtp_authenticators="plain"							# old value was "login"
+
+set from = $my_email
+set realname = $my_name
+
+set ssl_starttls=yes
+set ssl_force_tls=yes
+
+# IMAP account settings
+set folder=imaps://$my_email/
+set spoolfile=imaps://$my_email/
+#set record=imaps://$my_email/Sent Items
+set postponed=imaps://$my_email/Drafts
+#set imap_idle=yes
+
+# alternate imap folder settings
+#set folder ={$my_smtp}
+#set spoolfile={$my_smtp}INBOX
+#set postponed={$my_smtp}OUTBOX
+
+# Saves copies of outgoing mail to "Sent Items" folder
+fcc-hook ~A {$my_smtp}"Sent Items"
+set copy=yes
+
+# IMAP connection settings
+set mail_check=60 							        	# How often should mutt check for new mail?
+set timeout=15 							            	# Notify me of new mail in my mailbox this often
+set imap_check_subscribed=yes		 					# Automatically poll subscribed mailboxes for new mail
+
+# Signature
+set signature="~/.config/.mutt/.muttsig"
